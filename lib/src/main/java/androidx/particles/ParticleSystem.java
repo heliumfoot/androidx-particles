@@ -931,7 +931,9 @@ public class ParticleSystem {
 	}
 
 	private void cleanupAnimation() {
-		mParentView.removeView(mDrawingView);
+		if (mDrawingView != null) {
+			mParentView.removeView(mDrawingView);
+		}
 		mDrawingView = null;
 		mParentView.postInvalidate();
 		mParticles.addAll(mActiveParticles);
@@ -962,8 +964,9 @@ public class ParticleSystem {
 		if (mTimer != null) {
 			mTimer.cancel();
 			mTimer.purge();
-			cleanupAnimation();
 		}
+		cleanupAnimation();
+
 	}
 
 	private void updateParticlesBeforeStartTime(int particlesPerSecond) {
