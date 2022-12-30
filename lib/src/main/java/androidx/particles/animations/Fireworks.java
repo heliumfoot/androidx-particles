@@ -23,7 +23,7 @@ public class Fireworks {
         this.systems = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            int fireworkDuration = Math.max(new Long(Math.round(Math.random() * maxFireworkDuration)).intValue(),new Long(Math.round(maxFireworkDuration/3.0)).intValue());
+            int fireworkDuration = Math.max(new Long(Math.round(Math.random() * maxFireworkDuration)).intValue(),new Long(Math.round(maxFireworkDuration/2.0)).intValue());
             this.systems.add(new MultiSystem(parentView, activity, maxParticles, drawableResIds , fireworkDuration));
         }
 
