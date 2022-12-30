@@ -836,14 +836,6 @@ public class ParticleSystem {
 	}
 
 	private void configureEmitter(@NonNull View emitter, int gravity) {
-//		int[] location = new int[2];
-//		emitter.getLocationInWindow(location);
-//
-//
-//
-//	}
-//
-//	private void configureEmitter(int x, int y, int width, int height, int gravity) {
 		// It works with an emission range
 		int[] location = new int[2];
 		emitter.getLocationInWindow(location);
