@@ -776,6 +776,19 @@ public class ParticleSystem {
 	 */
 	public void oneShot(@NonNull View emitter, int numParticles, Interpolator interpolator) {
 		configureEmitter(emitter, Gravity.CENTER);
+		this.startOneShot(numParticles, interpolator);
+	}
+
+	public void oneShot(int x, int y, int numParticles) {
+		this.oneShot(x, y, numParticles, new LinearInterpolator());
+	}
+	public void oneShot(int x, int y, int numParticles, Interpolator interpolator) {
+		configureEmitter(x, y);
+		this.startOneShot(numParticles, interpolator);
+	}
+
+
+	private void startOneShot(int numParticles, Interpolator interpolator) {
 		mActivatedParticles = 0;
 		mEmittingTime = mTimeToLive;
 		// We create particles based in the parameters
