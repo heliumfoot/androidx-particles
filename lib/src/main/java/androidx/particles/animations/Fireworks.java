@@ -16,6 +16,7 @@ public class Fireworks {
     private long totalDuration;
     private long maxFireworkDuration;
     private Handler handler;
+    private boolean isRunning = false;
 
     public Fireworks(ViewGroup parentView, Activity activity, int maxParticles, List<Integer> drawableResIds, long totalDuration, long maxFireworkDuration, int count) {
         this.totalDuration = totalDuration;
@@ -31,6 +32,7 @@ public class Fireworks {
     }
 
     public void go() {
+        this.isRunning = true;
         for (int i = 0; i < this.systems.size(); i++) {
             int delay = new Long(Math.round(Math.random() * (this.totalDuration - this.maxFireworkDuration))).intValue();
 
@@ -38,11 +40,20 @@ public class Fireworks {
             this.handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    systems.get(index).go();
+                    if (isRunning) {
+                        systems.get(index).go();
+                    }
                 }
             }, delay);
         }
 
+    }
+
+    public void stop() {
+        this.isRunning = false;
+        for (MultiSystem system: this.systems) {
+            system.stop();
+        }
     }
 
 
@@ -71,7 +82,13 @@ class MultiSystem {
         int y = new Double(Math.random() * parentView.getHeight()).intValue();
         for (ParticleSystem ps: this.particleSystems) {
             ps.oneShot(x, y, 70);
+            ps.stopEmitting();
         }
 
+    }
+    public void stop() {
+        for (ParticleSystem ps: this.particleSystems) {
+            ps.cancel();
+        }
     }
 }

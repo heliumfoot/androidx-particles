@@ -18,14 +18,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FireworksExampleActivity extends Activity implements OnClickListener {
+public class FireworksExampleActivity extends Activity  {
 	private Fireworks fireworks;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_particle_system_constraint_example);
-		findViewById(R.id.button1).setOnClickListener(this);
+		findViewById(R.id.startButton).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				fireworks.go();
+			}
+		});
+		findViewById(R.id.stopButton).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				fireworks.stop();
+			}
+		});
 
 		ViewGroup parentView = (ViewGroup)this.findViewById(R.id.background_hook);
 
@@ -33,10 +44,6 @@ public class FireworksExampleActivity extends Activity implements OnClickListene
 
 	}
 
-	@Override
-	public void onClick(View arg0) {
-		this.fireworks.go();
-	}
 
 }
 
